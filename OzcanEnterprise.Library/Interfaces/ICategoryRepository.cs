@@ -1,9 +1,10 @@
-﻿using OzcanEnterprise.Library.Entities;
+﻿using OzcanEnterprise.Library.Dtos;
+using OzcanEnterprise.Library.Entities;
 
 namespace OzcanEnterprise.Library.Interfaces
 {
-    public interface ICategoryRepository : IBaseRepository<Category>
+    public interface ICategoryRepository : IBaseRepository<Category, CategoryDto>
     {
-        Task<Category?> GetCategoryByNameAsync(string name);
+        Task<CategoryDto?> GetCategoryByNameAsync(string name);
     }
 }

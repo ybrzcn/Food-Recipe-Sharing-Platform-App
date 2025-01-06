@@ -1,9 +1,11 @@
-﻿using OzcanEnterprise.Library.Entities;
+﻿using OzcanEnterprise.Library.Dtos;
+using OzcanEnterprise.Library.Entities;
 
 namespace OzcanEnterprise.Library.Interfaces
 {
-    public interface ICommentRepository : IBaseRepository<Comment>
+    public interface ICommentRepository : IBaseRepository<Comment, CommentDto>
     {
-        Task<IEnumerable<Comment>> GetCommentsByRecipeIdAsync(Guid recipeId);
+        Task<IEnumerable<CommentDto>> GetCommentsByRecipeIdAsync(Guid recipeId);
+        Task<IEnumerable<CommentDto>> GetCommentsByUserIdAsync(Guid userId);
     }
 }

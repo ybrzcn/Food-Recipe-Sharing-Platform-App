@@ -1,9 +1,10 @@
-﻿using OzcanEnterprise.Library.Entities;
+﻿using OzcanEnterprise.Library.Dtos;
+using OzcanEnterprise.Library.Entities;
 
 namespace OzcanEnterprise.Library.Interfaces
 {
-    public interface IUserRepository : IBaseRepository<User>
+    public interface IUserRepository : IBaseRepository<User, UserDto>
     {
-        Task<User?> GetUserByEmailAsync(string email);
+        Task<UserDto?> GetUserByEmailAsync(string email);
     }
 }

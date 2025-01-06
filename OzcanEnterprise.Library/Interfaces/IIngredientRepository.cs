@@ -1,9 +1,10 @@
-﻿using OzcanEnterprise.Library.Entities;
+﻿using OzcanEnterprise.Library.Dtos;
+using OzcanEnterprise.Library.Entities;
 
 namespace OzcanEnterprise.Library.Interfaces
 {
-    public interface IIngredientRepository : IBaseRepository<Ingredient>
+    public interface IIngredientRepository : IBaseRepository<Ingredient, IngredientDto>
     {
-        Task<IEnumerable<Ingredient>> GetIngredientsByRecipeIdAsync(Guid recipeId);
+        Task<IEnumerable<IngredientDto>> GetIngredientsByRecipeIdAsync(Guid recipeId);
     }
 }

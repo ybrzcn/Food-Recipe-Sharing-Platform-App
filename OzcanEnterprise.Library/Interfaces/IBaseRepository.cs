@@ -1,15 +1,12 @@
-﻿using System.Linq.Expressions;
-
-namespace OzcanEnterprise.Library.Interfaces
+﻿namespace OzcanEnterprise.Library.Interfaces
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<TEntity, TDto> where TEntity : class where TDto : class
     {
-        Task<T> GetByIdAsync(Guid id);
-        Task<IEnumerable<T>> GetAllAsync();
-        Task<IEnumerable<T>> FindAsync(Expression<Func<T, bool>> predicate);
-        Task CreateAsync(T entity);
-        Task UpdateAsync(T entity);
-        Task DeleteAsync(T entity);
+        Task<TDto?> GetByIdAsync(Guid id);
+        Task<IEnumerable<TDto>> GetAllAsync();
+        Task CreateAsync(TDto dto);
+        Task UpdateAsync(TDto dto);
+        Task DeleteAsync(Guid id);
         Task SaveAsync();
     }
 }

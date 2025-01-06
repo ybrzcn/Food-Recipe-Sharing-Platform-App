@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using OzcanEnterprise.Library.AppDbContexts;
 using OzcanEnterprise.Library.Dtos;
-﻿using OzcanEnterprise.Library.Entities;
+using OzcanEnterprise.Library.Entities;
 using OzcanEnterprise.Library.Interfaces;
 
 namespace OzcanEnterprise.Library.Repositories
@@ -14,42 +14,58 @@ namespace OzcanEnterprise.Library.Repositories
 
         public CategoryRepository(MainDbContext mainDbContext, IMapper mapper)
         {
-            throw new NotImplementedException();
+            _mainDbContext = mainDbContext;
+            _mapper = mapper;
         }
 
-        public Task DeleteAsync(Category entity)
+        public async Task CreateAsync(CategoryDto dto)
         {
-            throw new NotImplementedException();
+            var value = _mapper.Map<Category>(dto);
+            await _mainDbContext.AddAsync(value);
+            await SaveAsync();
         }
 
-        public Task<IEnumerable<Category>> FindAsync(Expression<Func<Category, bool>> predicate)
+        public async Task DeleteAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var value = await GetByIdAsync(id);
+            if (value != null)
+            {
+                _mainDbContext.Remove(_mapper.Map<Category>(value));
+                await SaveAsync();
+            }
         }
 
-        public Task<IEnumerable<Category>> GetAllAsync()
+        public async Task<IEnumerable<CategoryDto>> GetAllAsync()
         {
-            throw new NotImplementedException();
+            return await _mainDbContext.Categories
+                .OrderBy(c => c.Name)
+                .Select(c => _mapper.Map<CategoryDto>(c))
+                .ToListAsync();
         }
 
-        public Task<Category> GetByIdAsync(Guid id)
+        public async Task<CategoryDto?> GetByIdAsync(Guid id)
         {
-            throw new NotImplementedException();
+            var value = await _mainDbContext.Categories.FindAsync(id);
+            return _mapper.Map<CategoryDto>(value);
         }
 
-        public Task<Category?> GetCategoryByNameAsync(string name)
+        public async Task<CategoryDto?> GetCategoryByNameAsync(string name)
         {
-            throw new NotImplementedException();
+            var value = await _mainDbContext.Categories
+                .FirstOrDefaultAsync(c => c.Name.Equals(name, StringComparison.OrdinalIgnoreCase));
+            return _mapper.Map<CategoryDto>(value);
         }
 
-        public Task SaveAsync()
+        public async Task SaveAsync()
         {
-            throw new NotImplementedException();
+            await _mainDbContext.SaveChangesAsync();
         }
 
-        public Task UpdateAsync(Category entity)
+        public async Task UpdateAsync(CategoryDto dto)
         {
-            throw new NotImplementedException();
+            var value = _mapper.Map<Category>(dto);
+            _mainDbContext.Update(value);
+            await SaveAsync();
         }
     }
 }
