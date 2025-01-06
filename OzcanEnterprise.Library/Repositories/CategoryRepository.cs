@@ -1,17 +1,18 @@
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using OzcanEnterprise.Library.AppDbContexts;
+using OzcanEnterprise.Library.Dtos;
 ﻿using OzcanEnterprise.Library.Entities;
 using OzcanEnterprise.Library.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace OzcanEnterprise.Library.Repositories
 {
     public class CategoryRepository : ICategoryRepository
     {
-        public Task CreateAsync(Category entity)
+        private readonly MainDbContext _mainDbContext;
+        private readonly IMapper _mapper;
+
+        public CategoryRepository(MainDbContext mainDbContext, IMapper mapper)
         {
             throw new NotImplementedException();
         }
