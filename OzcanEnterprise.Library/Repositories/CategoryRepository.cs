@@ -45,7 +45,7 @@ namespace OzcanEnterprise.Library.Repositories
 
         public async Task<CategoryDto?> GetByIdAsync(Guid id)
         {
-            var value = await _mainDbContext.Categories.FindAsync(id);
+            var value = await _mainDbContext.Categories.FirstOrDefaultAsync(x => x.Id == id);
             return _mapper.Map<CategoryDto>(value);
         }
 

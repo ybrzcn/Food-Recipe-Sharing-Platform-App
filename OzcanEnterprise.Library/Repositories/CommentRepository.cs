@@ -45,7 +45,7 @@ namespace OzcanEnterprise.Library.Repositories
 
         public async Task<CommentDto?> GetByIdAsync(Guid id)
         {
-            var value = await _mainDbContext.Comments.FindAsync(id);
+            var value = await _mainDbContext.Comments.FirstOrDefaultAsync(x => x.Id == id);
             return _mapper.Map<CommentDto?>(value);
         }
 

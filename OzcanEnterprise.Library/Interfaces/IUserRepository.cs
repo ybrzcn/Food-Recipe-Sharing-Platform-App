@@ -5,6 +5,6 @@ namespace OzcanEnterprise.Library.Interfaces
 {
     public interface IUserRepository : IBaseRepository<User, UserDto>
     {
-        Task<UserDto?> GetUserByEmailAsync(string email);
+        Task<IEnumerable<UserDto>> GetUserByEmailAsync(string email);
     }
 }
