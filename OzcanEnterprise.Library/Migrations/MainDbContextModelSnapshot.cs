@@ -45,7 +45,7 @@ namespace OzcanEnterprise.Library.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Categories");
+                    b.ToTable("Categories", (string)null);
                 });
 
             modelBuilder.Entity("OzcanEnterprise.Library.Entities.Comment", b =>
@@ -77,7 +77,7 @@ namespace OzcanEnterprise.Library.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Comments");
+                    b.ToTable("Comments", (string)null);
                 });
 
             modelBuilder.Entity("OzcanEnterprise.Library.Entities.Ingredient", b =>
@@ -114,7 +114,7 @@ namespace OzcanEnterprise.Library.Migrations
 
                     b.HasIndex("RecipeId");
 
-                    b.ToTable("Ingredients");
+                    b.ToTable("Ingredients", (string)null);
                 });
 
             modelBuilder.Entity("OzcanEnterprise.Library.Entities.Rating", b =>
@@ -144,7 +144,7 @@ namespace OzcanEnterprise.Library.Migrations
 
                     b.HasIndex("UserId");
 
-                    b.ToTable("Ratings");
+                    b.ToTable("Ratings", (string)null);
                 });
 
             modelBuilder.Entity("OzcanEnterprise.Library.Entities.Recipe", b =>
@@ -193,7 +193,7 @@ namespace OzcanEnterprise.Library.Migrations
 
                     b.HasIndex("CategoryId");
 
-                    b.ToTable("Recipes");
+                    b.ToTable("Recipes", (string)null);
                 });
 
             modelBuilder.Entity("OzcanEnterprise.Library.Entities.User", b =>
@@ -236,7 +236,7 @@ namespace OzcanEnterprise.Library.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Users");
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("OzcanEnterprise.Library.Entities.Comment", b =>
