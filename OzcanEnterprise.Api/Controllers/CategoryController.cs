@@ -17,7 +17,7 @@ namespace OzcanEnterprise.Api.Controllers
             _categoryRepository = categoryRepository;
         }
 
-        [HttpGet]
+        [HttpGet("GetCategories")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<Category>))]
         public async Task<IActionResult> GetCategories()
         {
@@ -25,7 +25,7 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok(values);
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetCategoryById/{id}")]
         [ProducesResponseType(200, Type = typeof(Category))]
         [ProducesResponseType(400)]
         public async Task<IActionResult> GetCategoryById(Guid id)
@@ -34,7 +34,7 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok(value);
         }
 
-        [HttpGet("name/{name}")]
+        [HttpGet("GetCategoryByName/name/{name}")]
         [ProducesResponseType(200, Type = typeof(CategoryDto))]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetCategoryByName(string name)
@@ -44,7 +44,7 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok(value);
         }
 
-        [HttpPost]
+        [HttpPost("CreateCategory")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> CreateCategory(CategoryDto dto)
@@ -53,7 +53,7 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok("Category created successfully.");
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("DeleteCategory/{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]
         public async Task<IActionResult> DeleteCategory(Guid id)
@@ -62,7 +62,7 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok("Category deleted successfully.");
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("UpdateCategory/{id}")]
         [ProducesResponseType(400)]
         [ProducesResponseType(204)]
         [ProducesResponseType(404)]

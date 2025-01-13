@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using OzcanEnterprise.Library.AppDbContexts;
 using OzcanEnterprise.Library.Interfaces;
 using OzcanEnterprise.Library.Repositories;
@@ -16,6 +17,13 @@ namespace OzcanEnterprise.Api
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
 
+            // Add Swagger services
+            builder.Services.AddEndpointsApiExplorer();
+            builder.Services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "OzcanEnterprise API", Version = "v1" });
+            });
+
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             builder.Services.AddOpenApi();
             builder.Services.AddDbContext<MainDbContext>(options =>
@@ -27,6 +35,11 @@ namespace OzcanEnterprise.Api
             if (app.Environment.IsDevelopment())
             {
                 app.MapOpenApi();
+                app.UseSwagger();
+                app.UseSwaggerUI(c =>
+                {
+                    c.SwaggerEndpoint("/swagger/v1/swagger.json", "OzcanEnterprise API v1");
+                });
             }
 
             app.UseHttpsRedirection();
