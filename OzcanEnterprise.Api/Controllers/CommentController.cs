@@ -2,7 +2,6 @@
 using OzcanEnterprise.Library.Dtos;
 using OzcanEnterprise.Library.Entities;
 using OzcanEnterprise.Library.Interfaces;
-using OzcanEnterprise.Library.Repositories;
 
 namespace OzcanEnterprise.Api.Controllers
 {

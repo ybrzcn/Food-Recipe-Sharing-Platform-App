@@ -1,5 +1,4 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using OzcanEnterprise.Library.Dtos;
 using OzcanEnterprise.Library.Entities;
 using OzcanEnterprise.Library.Interfaces;
