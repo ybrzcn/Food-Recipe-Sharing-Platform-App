@@ -33,10 +33,10 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok(value);
         }
 
-        [HttpGet("GetCommentsByRecipeIdAsync/{recipeId}")]
+        [HttpGet("GetCommentsByRecipeId/{recipeId}")]
         [ProducesResponseType(200, Type = typeof(IEnumerable<CommentDto>))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetCommentsByRecipeIdAsync(Guid recipeId)
+        public async Task<IActionResult> GetCommentsByRecipeId(Guid recipeId)
         {
             var values = await _commentRepository.GetCommentsByRecipeIdAsync(recipeId);
             if (values == null || !values.Any()) 
@@ -45,10 +45,10 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok(values);
         }
 
-        [HttpGet("GetCommentsByUserIdAsync/{userId}")]
+        [HttpGet("GetCommentsByUserId/{userId}")]
         [ProducesResponseType(200, Type = typeof(CommentDto))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetCommentsByUserIdAsync(Guid userId)
+        public async Task<IActionResult> GetCommentsByUserId(Guid userId)
         {
             var values = await _commentRepository.GetCommentsByUserIdAsync(userId);
             if (values == null || !values.Any())
