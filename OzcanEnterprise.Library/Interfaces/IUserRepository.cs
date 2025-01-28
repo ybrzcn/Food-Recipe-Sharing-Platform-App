@@ -8,5 +8,6 @@ namespace OzcanEnterprise.Library.Interfaces
         Task<IEnumerable<UserDto>> GetUserByEmailAsync(string email);
         Task<IEnumerable<UserDto>> GetUserByUserNameAsync(string userName);
         Task<UserDto?> GetUserByUserNameForLoginAsync(string userName);
+        Task UpdateLastLoginDateAsync(Guid userId, DateTime lastLoginDate);
     }
 }

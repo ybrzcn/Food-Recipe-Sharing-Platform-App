@@ -1,10 +1,10 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using OzcanEnterprise.Library.Dtos;
 using OzcanEnterprise.Library.Entities;
 using OzcanEnterprise.Library.Interfaces;
-using OzcanEnterprise.Library.Repositories;
 
 namespace OzcanEnterprise.Api.Controllers
 {
@@ -47,10 +47,14 @@ namespace OzcanEnterprise.Api.Controllers
             var result = _passwordHasher.VerifyHashedPassword(user, user.PasswordHash, request.Password);
             if (result == PasswordVerificationResult.Success)
             {
+                await _userRepository.UpdateLastLoginDateAsync(userDto.Id, DateTime.UtcNow);
+
                 return Ok("Login successful.");
             }
 
-            return BadRequest("Invalid password.");
+            string token = "succes";
+
+            return BadRequest("Password is invalid.");
         }
     }
 }

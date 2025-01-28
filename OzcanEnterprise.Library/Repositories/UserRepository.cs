@@ -24,6 +24,7 @@ namespace OzcanEnterprise.Library.Repositories
         public async Task CreateAsync(UserDto dto)
         {
             var value = _mapper.Map<User>(dto);
+            value.Id = Guid.NewGuid();
             value.PasswordHash = _passwordHasher.HashPassword(value, dto.Password);
             await _mainDbContext.AddAsync(value);
             await SaveAsync();
@@ -91,8 +92,20 @@ namespace OzcanEnterprise.Library.Repositories
 
         public async Task UpdateAsync(UserDto dto)
         {
-            var value = _mapper.Map<CommentDto>(dto);
+            var value = _mapper.Map<User>(dto);
             _mainDbContext.Update(value);
+            await SaveAsync();
+        }
+
+        public async Task UpdateLastLoginDateAsync(Guid userId, DateTime lastLoginDate)
+        {
+            var user = await _mainDbContext.Users.FindAsync(userId);
+            if (user == null)
+            {
+                throw new KeyNotFoundException("User not found.");
+            }
+
+            user.LastLoginDate = lastLoginDate;
             await SaveAsync();
         }
     }
