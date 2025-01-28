@@ -13,7 +13,11 @@ namespace OzcanEnterprise.Library.Mapping
             CreateMap<Ingredient, IngredientDto>().ReverseMap();
             CreateMap<Rating, RatingDto>().ReverseMap();
             CreateMap<Recipe, RecipeDto>().ReverseMap();
-            CreateMap<User, UserDto>().ReverseMap();
+
+            CreateMap<UserDto, User>();
+
+            CreateMap<User, UserDto>()
+                .ForMember(dest => dest.Password, opt => opt.MapFrom(src => src.PasswordHash));
         }
     }
 }

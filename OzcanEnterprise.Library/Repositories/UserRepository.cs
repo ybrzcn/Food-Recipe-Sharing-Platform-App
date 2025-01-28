@@ -61,6 +61,29 @@ namespace OzcanEnterprise.Library.Repositories
                 .ToListAsync();
         }
 
+        public async Task<IEnumerable<UserDto>> GetUserByUserNameAsync(string userName)
+        {
+            return await _mainDbContext.Users
+                .Where(x => x.UserName == userName)
+                .Select(x => _mapper.Map<UserDto>(x))
+                .ToListAsync();
+        }
+
+        public async Task<UserDto?> GetUserByUserNameForLoginAsync(string userName)
+        {
+            var user = await _mainDbContext.Users
+                .FirstOrDefaultAsync(x => x.UserName == userName);
+
+            if (user == null)
+            {
+                return null; // Kullanıcı bulunamazsa null döndür
+            }
+
+            var userDto = _mapper.Map<UserDto>(user);
+            userDto.Password = user.PasswordHash;
+            return userDto;
+        }
+
         public async Task SaveAsync()
         {
             await _mainDbContext.SaveChangesAsync();

@@ -34,12 +34,22 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok(value);
         }
 
-        [HttpGet("GetCategoryByEmail/{email}")]
+        [HttpGet("GetUserByEmail/{email}")]
         [ProducesResponseType(200, Type = typeof(UserDto))]
         [ProducesResponseType(404)]
-        public async Task<IActionResult> GetCategoryByEmail(string email)
+        public async Task<IActionResult> GetUserByEmail(string email)
         {
             var value = await _userRepository.GetUserByEmailAsync(email);
+            if (value == null) return NotFound("User not found.");
+            return Ok(value);
+        }
+
+        [HttpGet("GetUserByUserName/{userName}")]
+        [ProducesResponseType(200, Type = typeof(UserDto))]
+        [ProducesResponseType(404)]
+        public async Task<IActionResult> GetUserByUserName(string userName)
+        {
+            var value = await _userRepository.GetUserByUserNameAsync(userName);
             if (value == null) return NotFound("User not found.");
             return Ok(value);
         }
