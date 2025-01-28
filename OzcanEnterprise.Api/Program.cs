@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.OpenApi.Models;
 using OzcanEnterprise.Library.AppDbContexts;
+using OzcanEnterprise.Library.Entities;
 using OzcanEnterprise.Library.Interfaces;
 using OzcanEnterprise.Library.Repositories;
 
@@ -16,6 +18,12 @@ namespace OzcanEnterprise.Api
             builder.Services.AddControllers();
             builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
             builder.Services.AddScoped<ICategoryRepository, CategoryRepository>();
+            builder.Services.AddScoped<ICommentRepository, CommentRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
+            builder.Services.AddScoped<IIngredientRepository, IngredientRepository>();
+            builder.Services.AddScoped<IRatingRepository, RatingRepository>();
+            builder.Services.AddScoped<IRecipeRepository, RecipeRepository>();
+            builder.Services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
             // Add Swagger services
             builder.Services.AddEndpointsApiExplorer();

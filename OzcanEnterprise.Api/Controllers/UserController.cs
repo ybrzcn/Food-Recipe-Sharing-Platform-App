@@ -44,15 +44,6 @@ namespace OzcanEnterprise.Api.Controllers
             return Ok(value);
         }
 
-        [HttpPost("CreateUser")]
-        [ProducesResponseType(204)]
-        [ProducesResponseType(400)]
-        public async Task<IActionResult> CreateUser(UserDto dto)
-        {
-            await _userRepository.CreateAsync(dto);
-            return Ok("User created successfully.");
-        }
-
         [HttpDelete("DeleteUser/{id}")]
         [ProducesResponseType(204)]
         [ProducesResponseType(400)]

@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using OzcanEnterprise.Library.AppDbContexts;
 using OzcanEnterprise.Library.Dtos;
@@ -11,16 +12,19 @@ namespace OzcanEnterprise.Library.Repositories
     {
         private readonly MainDbContext _mainDbContext;
         private readonly IMapper _mapper;
+        private readonly IPasswordHasher<User> _passwordHasher;
 
-        public UserRepository(MainDbContext mainDbContext, IMapper mapper)
+        public UserRepository(MainDbContext mainDbContext, IMapper mapper, IPasswordHasher<User> passwordHasher)
         {
             _mainDbContext = mainDbContext;
             _mapper = mapper;
+            _passwordHasher = passwordHasher;
         }
 
         public async Task CreateAsync(UserDto dto)
         {
             var value = _mapper.Map<User>(dto);
+            value.PasswordHash = _passwordHasher.HashPassword(value, dto.Password);
             await _mainDbContext.AddAsync(value);
             await SaveAsync();
         }
