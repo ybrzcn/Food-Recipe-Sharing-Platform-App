@@ -1,4 +1,4 @@
-# OzcanEnterprise
+# Recipe Sharing Platform App
 
 Recipe Sharing Platform
 
