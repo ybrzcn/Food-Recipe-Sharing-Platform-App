@@ -1,4 +1,4 @@
-# Recipe Sharing Platform App
+# Food Recipe Sharing Platform App
 
 Recipe Sharing Platform
 
